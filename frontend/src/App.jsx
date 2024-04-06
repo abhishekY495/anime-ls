@@ -11,7 +11,7 @@ export const App = () => {
     setPlanets([]);
     setLoading(true);
     try {
-      const response = await fetch(API_URL + "data");
+      const response = await fetch(API_URL + "/data");
       const data = await response.json();
       setLoading(false);
       setPlanets(data.planets);
