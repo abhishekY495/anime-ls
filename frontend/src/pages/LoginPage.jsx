@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import axios from "axios";
 
 import { Login } from "../components/Login";
@@ -12,9 +13,6 @@ export const LoginPage = () => {
     username: "",
     password: "",
   });
-  const [showToast, setShowToast] = useState(false);
-  const [toastText, setToastText] = useState("");
-  const [toastColor, setToastColor] = useState("");
   const navigate = useNavigate();
 
   const inputChangeHandler = (e) => {
@@ -24,36 +22,28 @@ export const LoginPage = () => {
     };
     setUserData(data);
   };
-  const toastChangeHandler = () => setShowToast(false);
+
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     if (userData.username.trim().length === 0) {
-      setToastColor("danger");
-      setToastText("Username cannot be empty");
-      setShowToast(true);
+      toast.error("Username cannot be empty");
     } else if (userData.password.length === 0) {
-      setToastColor("danger");
-      setToastText("Password cannot be empty");
-      setShowToast(true);
+      toast.error("Password cannot be empty");
     } else {
+      const toastId = toast.loading("Logging In");
       try {
         dispatch({ type: "USER_DATA_LOADING" });
         const data = await axios.post(API_URL + "/user/login", userData, {
           withCredentials: true,
         });
         const { message, user } = data?.data;
-        setToastColor("success");
-        setToastText(message);
-        setShowToast(true);
+        toast.success(message, { id: toastId });
         dispatch({ type: "USER_DATA", payload: user });
         navigate("/dashboard");
       } catch (error) {
         dispatch({ type: "USER_DATA_ERROR" });
-        console.error(error);
         const { message } = error?.response?.data;
-        setToastColor("danger");
-        setToastText(message || "Something went wrong");
-        setShowToast(true);
+        toast.error(message, { id: toastId });
       }
     }
   };
@@ -68,10 +58,7 @@ export const LoginPage = () => {
     <Login
       inputChangeHandler={inputChangeHandler}
       formSubmitHandler={formSubmitHandler}
-      toastChangeHandler={toastChangeHandler}
-      showToast={showToast}
-      toastText={toastText}
-      toastColor={toastColor}
+      userDataLoading={state.userDataLoading}
     />
   );
 };
