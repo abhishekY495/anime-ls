@@ -7,22 +7,22 @@ import { tryCatchAsyncHandler } from "../utils/tryCatchAsyncHandler.js";
 export const registerUser = tryCatchAsyncHandler(async (req, res) => {
   const { fullname, username, email, password } = req.body;
 
-  const usernameExists = await User.findOne({ username });
+  const usernameExists = await User.findOne({ username: username.trim() });
   if (usernameExists) {
     res.status(400);
     throw new Error("Username already exists");
   }
 
-  const emailExists = await User.findOne({ email });
+  const emailExists = await User.findOne({ email: email.trim() });
   if (emailExists) {
     res.status(400);
     throw new Error("Email already exists");
   }
 
   const registeredUser = await User.create({
-    fullname,
-    email,
-    username,
+    fullname: fullname.trim(),
+    email: email.trim(),
+    username: username.trim(),
     password,
     privateLists: [],
     publicLists: [],
@@ -76,7 +76,7 @@ export const loginUser = tryCatchAsyncHandler(async (req, res) => {
 export const logoutUser = tryCatchAsyncHandler(async (req, res) => {
   res.cookie("token", "", destroyCookieOptions);
   res.json({
-    message: "Logged Out Successfully",
+    message: "Logged Out",
   });
 });
 

@@ -15,7 +15,7 @@ export const loginUserValidation = (req, res, next) => {
   }
   if (username.trim().length === 0) {
     res.status(400);
-    throw new Error("username cannot be empty");
+    throw new Error("Username cannot be empty");
   }
   if (!password) {
     res.status(400);

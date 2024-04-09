@@ -15,7 +15,7 @@ export const registerUserValidation = (req, res, next) => {
   }
   if (fullname.trim().length === 0) {
     res.status(400);
-    throw new Error("fullname cannot be empty");
+    throw new Error("Fullname cannot be empty");
   }
   //
   if (!username) {
@@ -28,7 +28,7 @@ export const registerUserValidation = (req, res, next) => {
   }
   if (username.trim().length < 3) {
     res.status(400);
-    throw new Error("username should be atleast 3 characters");
+    throw new Error("Username should be atleast 3 characters");
   }
   //
   if (!email) {
