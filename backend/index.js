@@ -1,8 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
-import { connectDB } from "./config/connectDB.js";
+import { connectDB } from "./src/config/connectDB.js";
+import { userRoutes } from "./src/routes/userRoutes.js";
+import { errorHandler } from "./src/middlewares/errorHandlerMiddleware.js";
+import { notFound } from "./src/middlewares/notFoundMiddleware.js";
 
 dotenv.config();
 
@@ -22,22 +26,15 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello World" });
+app.get("/api", (req, res) => {
+  res.status(200).json({ message: "Server is live", live: true });
 });
-app.get("/api/data", (req, res) => {
-  const planets = [
-    "Mercury",
-    "Venus",
-    "Earth",
-    "Mars",
-    "Jupiter",
-    "Saturn",
-    "Uranus",
-    "Neptune",
-  ];
-  res.json({ planets });
-});
+
+app.use("/api/user", userRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`server listening on Port ${port}`));

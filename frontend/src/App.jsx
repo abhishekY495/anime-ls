@@ -1,41 +1,56 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { API_URL } from "../utils/constants";
+import { NavBar } from "./components/NavBar";
+import { HomePage } from "./pages/HomePage";
+import { RegisterPage } from "./pages/RegisterPage";
+import { LoginPage } from "./pages/LoginPage";
+import { DashboardPage } from "./pages/DashboardPage";
+import { UserDataContext } from "./contexts/UserDataContext";
+import { API_URL } from "./utils/constants";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export const App = () => {
-  const [planets, setPlanets] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { dispatch } = useContext(UserDataContext);
 
-  const fetchData = async () => {
-    setPlanets([]);
-    setLoading(true);
+  const getUserDetails = async () => {
+    dispatch({ type: "USER_DATA_LOADING" });
     try {
-      const response = await fetch(API_URL + "/data");
-      const data = await response.json();
-      setLoading(false);
-      setPlanets(data.planets);
+      const data = await axios.get(API_URL + "/user/profile", {
+        withCredentials: true,
+      });
+      const { user } = data?.data;
+      // setTimeout(() => {
+      dispatch({ type: "USER_DATA", payload: user });
+      // }, 15000);
     } catch (error) {
+      dispatch({ type: "USER_DATA_ERROR" });
       console.error(error);
     }
   };
 
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
   return (
-    <div className="container py-4 px-3 mx-auto d-flex flex-column align-items-center">
-      <button
-        className="btn btn-primary fw-semibold px-4"
-        type="button"
-        onClick={fetchData}
-        disabled={loading}
-      >
-        Get Planets
-      </button>
-      <hr className="bg-black w-100" />
-      {loading && <div>Loading</div>}
-      {planets.length !== 0 &&
-        planets.map((planet) => {
-          return <div key={planet}>{planet}</div>;
-        })}
-    </div>
+    <>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 };
