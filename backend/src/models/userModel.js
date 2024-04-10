@@ -2,19 +2,20 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const animeSchema = new mongoose.Schema({
-  _id: { type: String, required: true },
   title: { type: String, required: true },
   coverImage: { type: String, required: true },
-  rating: { type: Number, required: true },
+  score: { type: Number, required: true },
   link: { type: String, required: true },
 });
 
-const listsSchema = new mongoose.Schema({
-  _id: { type: String, required: true },
+const publicListSchema = new mongoose.Schema({
   listTitle: { type: String, required: true },
   animes: { type: [animeSchema] },
-  isPublic: { type: Boolean, required: true },
   hits: { type: Number, required: true, default: 0 },
+});
+const privateListSchema = new mongoose.Schema({
+  listTitle: { type: String, required: true },
+  animes: { type: [animeSchema] },
 });
 
 const userSchema = new mongoose.Schema(
@@ -23,7 +24,8 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true, lowercase: true },
     username: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
-    animeLists: { type: [listsSchema] },
+    publicLists: { type: [publicListSchema] },
+    privateLists: { type: [privateListSchema] },
   },
   { timestamps: true }
 );

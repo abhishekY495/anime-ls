@@ -22,8 +22,8 @@ export const registerUser = tryCatchAsyncHandler(async (req, res) => {
     email: email.trim(),
     username: username.trim(),
     password,
-    privateLists: [],
     publicLists: [],
+    privateLists: [],
   });
   if (!registeredUser) {
     res.status(400);
@@ -38,7 +38,8 @@ export const registerUser = tryCatchAsyncHandler(async (req, res) => {
       fullname: registeredUser.fullname,
       email: registeredUser.email,
       username: registeredUser.username,
-      animeLists: registeredUser.animeLists,
+      publicLists: registeredUser.publicLists,
+      privateLists: registeredUser.privateLists,
     },
   });
 });
@@ -66,7 +67,8 @@ export const loginUser = tryCatchAsyncHandler(async (req, res) => {
       fullname: user.fullname,
       email: user.email,
       username: user.username,
-      animeLists: user.animeLists,
+      publicLists: user.publicLists,
+      privateLists: user.privateLists,
     },
   });
 });
@@ -86,7 +88,8 @@ export const updateUser = tryCatchAsyncHandler(async (req, res) => {
       fullname: updatedUser.fullname,
       email: updatedUser.email,
       username: updatedUser.username,
-      animeLists: updatedUser.animeLists,
+      publicLists: updatedUser.publicLists,
+      privateLists: updatedUser.privateLists,
     },
   });
 });
