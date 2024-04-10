@@ -10,50 +10,16 @@ export const SpinnerLoader = () => {
       <Row>
         <Col md={1} className="m-auto" style={{ width: "800px" }}>
           <Placeholder animation="glow">
-            <Placeholder xs={4} className="rounded mb-3 p-3" />
+            <Placeholder xs={3} className="rounded p-3 mb-3" />
           </Placeholder>
           <br />
-          {/*  */}
-          <Placeholder animation="glow">
-            <Placeholder xs={3} className="rounded mb-2" />
+          <Placeholder animation="glow" className="pb-4 border-bottom">
+            <Placeholder
+              xs={12}
+              className="rounded mb-4"
+              style={{ padding: "28px" }}
+            />
           </Placeholder>
-          <Placeholder animation="glow">
-            <Placeholder xs={12} className="rounded p-3 mb-4" />
-          </Placeholder>
-          {/*  */}
-          <Placeholder animation="glow">
-            <Placeholder xs={1} className="rounded mb-2" />
-          </Placeholder>
-          <Placeholder animation="glow">
-            <Placeholder xs={12} className="rounded p-3 mb-4" />
-          </Placeholder>
-          {/*  */}
-          <Placeholder animation="glow">
-            <Placeholder xs={2} className="rounded mb-2" />
-          </Placeholder>
-          <Placeholder animation="glow">
-            <Placeholder xs={12} className="rounded p-3 mb-4" />
-          </Placeholder>
-          {/*  */}
-          <Placeholder animation="glow">
-            <Placeholder xs={2} className="rounded mb-2" />
-          </Placeholder>
-          <Placeholder animation="glow">
-            <Placeholder xs={12} className="rounded p-3 mb-4" />
-          </Placeholder>
-          {/*  */}
-          <div className="d-flex justify-content-between">
-            <button
-              col={6}
-              className="btn btn-primary disabled p-3"
-              style={{ width: "48%" }}
-            ></button>
-            <button
-              col={6}
-              className="btn btn-danger disabled p-3"
-              style={{ width: "48%" }}
-            ></button>
-          </div>
         </Col>
       </Row>
     </Container>

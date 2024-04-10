@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 
-import profileIcon from "../assets/profile-icon.svg";
+import profileIcon from "../assets/profile-icon.png";
 import { UserDataContext } from "../contexts/UserDataContext";
 
 export const NavBar = () => {

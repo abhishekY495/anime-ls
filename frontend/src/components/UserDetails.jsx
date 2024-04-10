@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -7,14 +6,12 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 import { updateUser } from "../services/updateUser";
-import { logoutUser } from "../services/authentication/logoutUser";
 
 export const UserDetails = ({ userData, dispatch }) => {
   const [fullname, setFullname] = useState(userData?.fullname);
   const [email, setEmail] = useState(userData?.email);
   const [password, setPassword] = useState("");
   const [disableUpdateBtn, setDisableUpdateBtn] = useState(true);
-  const navigate = useNavigate();
 
   const fullnameChangeHandler = (e) => {
     const fname = e.target.value;
@@ -56,18 +53,11 @@ export const UserDetails = ({ userData, dispatch }) => {
     );
   };
 
-  const logoutBtnHandler = () => {
-    logoutUser(dispatch, navigate);
-  };
-
   return (
     <Container>
       <Row>
         <Col md={1} className="m-auto" style={{ width: "800px" }}>
           <Form onSubmit={formSubmitHandler}>
-            <p className="fs-1 mb-2 text-white fw-semibold w-100 border-bottom">
-              Dashboard
-            </p>
             <Form.Group className="mb-3" controlId="formGroupFullname">
               <Form.Label className="mb-1">Full Name</Form.Label>
               <Form.Control
@@ -121,7 +111,7 @@ export const UserDetails = ({ userData, dispatch }) => {
                   Update
                 </Button>
               </Col>
-              <Col>
+              {/* <Col>
                 <Button
                   type="button"
                   variant="danger"
@@ -130,7 +120,7 @@ export const UserDetails = ({ userData, dispatch }) => {
                 >
                   Logout
                 </Button>
-              </Col>
+              </Col> */}
             </Row>
           </Form>
         </Col>
