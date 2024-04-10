@@ -1,6 +1,4 @@
 import { User } from "../models/userModel.js";
-import { options } from "../utils/cookieOptions.js";
-import { destroyCookieOptions } from "../utils/destroyCookieOptions.js";
 import { generateToken } from "../utils/generateToken.js";
 import { tryCatchAsyncHandler } from "../utils/tryCatchAsyncHandler.js";
 
@@ -33,9 +31,9 @@ export const registerUser = tryCatchAsyncHandler(async (req, res) => {
   }
 
   const token = generateToken(registeredUser._id);
-  res.cookie("token", token, options);
   res.json({
     message: "Registration Successful",
+    token,
     user: {
       fullname: registeredUser.fullname,
       email: registeredUser.email,
@@ -61,22 +59,15 @@ export const loginUser = tryCatchAsyncHandler(async (req, res) => {
   }
 
   const token = generateToken(user._id);
-  res.cookie("token", token, options);
   res.json({
     message: "Login Successful",
+    token,
     user: {
       fullname: user.fullname,
       email: user.email,
       username: user.username,
       animeLists: user.animeLists,
     },
-  });
-});
-
-export const logoutUser = tryCatchAsyncHandler(async (req, res) => {
-  res.cookie("token", "", destroyCookieOptions);
-  res.json({
-    message: "Logged Out",
   });
 });
 

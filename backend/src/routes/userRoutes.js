@@ -2,7 +2,6 @@ import express from "express";
 
 import {
   loginUser,
-  logoutUser,
   registerUser,
   updateUser,
   userProfile,
@@ -16,6 +15,5 @@ export const userRoutes = express.Router();
 
 userRoutes.post("/register", registerUserValidation, registerUser);
 userRoutes.post("/login", loginUserValidation, loginUser);
-userRoutes.get("/logout", logoutUser);
 userRoutes.put("/profile", isAuthenticated, updateUserValidation, updateUser);
 userRoutes.get("/profile", isAuthenticated, userProfile);
