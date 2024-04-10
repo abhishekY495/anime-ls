@@ -13,7 +13,8 @@ export const updateUser = async (
   email,
   password,
   dispatch,
-  setDisableUpdateBtn
+  setDisableUpdateBtn,
+  setPassword
 ) => {
   e.preventDefault();
   if (fullname.trim().length === 0) {
@@ -34,6 +35,7 @@ export const updateUser = async (
       const { message, user } = data?.data;
       toast.success(message, { id: toastId });
       dispatch({ type: "USER_DATA", payload: user });
+      setPassword("");
     } catch (error) {
       dispatch({ type: "USER_DATA_ERROR" });
       const { message } = error?.response?.data;

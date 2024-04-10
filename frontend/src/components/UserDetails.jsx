@@ -45,7 +45,15 @@ export const UserDetails = ({ userData, dispatch }) => {
   };
 
   const formSubmitHandler = async (e) => {
-    updateUser(e, fullname, email, password, dispatch, setDisableUpdateBtn);
+    updateUser(
+      e,
+      fullname,
+      email,
+      password,
+      dispatch,
+      setDisableUpdateBtn,
+      setPassword
+    );
   };
 
   const logoutBtnHandler = () => {
@@ -99,6 +107,7 @@ export const UserDetails = ({ userData, dispatch }) => {
                 className="text-muted"
                 placeholder="Fill to update password"
                 onChange={passwordChangeHandler}
+                value={password}
               />
             </Form.Group>
             <Row>
