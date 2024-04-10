@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { NavBar } from "./components/NavBar";
@@ -10,35 +9,28 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { LoginPage } from "./pages/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { UserDataContext } from "./contexts/UserDataContext";
-import { API_URL } from "./utils/constants";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { isAuthenticated } from "./services/authentication/isAuthenticated";
 
 export const App = () => {
   const { dispatch } = useContext(UserDataContext);
-
-  const getUserDetails = async () => {
-    dispatch({ type: "USER_DATA_LOADING" });
-    try {
-      const data = await axios.get(API_URL + "/user/profile", {
-        withCredentials: true,
-      });
-      const { user } = data?.data;
-      dispatch({ type: "USER_DATA", payload: user });
-    } catch (error) {
-      dispatch({ type: "USER_DATA_ERROR" });
-      console.error(error);
-    }
-  };
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    getUserDetails();
+    if (token !== null) {
+      isAuthenticated(token, dispatch);
+    } else {
+      dispatch({ type: "USER_DATA_ERROR" });
+      localStorage.clear();
+    }
   }, []);
 
   return (
     <>
       <Toaster
-        position="bottom-left"
-        toastOptions={{ style: { background: "#333", color: "#fff" } }}
+        position="top-center"
+        toastOptions={{ style: { background: "#404040", color: "#fff" } }}
+        containerStyle={{ top: 10 }}
       />
       <NavBar />
       <Routes>

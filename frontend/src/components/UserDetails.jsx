@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-import { validEmailFormat } from "../utils/validEmailFormat";
-import { API_URL } from "../utils/constants";
+import { updateUser } from "../services/updateUser";
+import { logoutUser } from "../services/authentication/logoutUser";
 
 export const UserDetails = ({ userData, dispatch }) => {
   const [fullname, setFullname] = useState(userData?.fullname);
@@ -47,42 +45,11 @@ export const UserDetails = ({ userData, dispatch }) => {
   };
 
   const formSubmitHandler = async (e) => {
-    e.preventDefault();
-    if (fullname.trim().length === 0) {
-      toast.error("Full Name cannot be empty");
-    } else if (email.trim().length === 0) {
-      toast.error("Email cannot be empty");
-    } else if (!validEmailFormat(email)) {
-      toast.error("Invalid Email format");
-    } else {
-      const toastId = toast.loading("Logging In");
-      try {
-        dispatch({ type: "USER_DATA_LOADING" });
-        const updateData = { fullname, email, password };
-        const data = await axios.put(API_URL + "/user/profile", updateData, {
-          withCredentials: true,
-        });
-        const { message, user } = data?.data;
-        toast.success(message, { id: toastId });
-        dispatch({ type: "USER_DATA", payload: user });
-      } catch (error) {
-        console.error(error);
-        dispatch({ type: "USER_DATA_ERROR" });
-        const { message } = error?.response?.data;
-        toast.error(message, { id: toastId });
-      }
-    }
+    updateUser(e, fullname, email, password, dispatch, setDisableUpdateBtn);
   };
 
-  const logoutHandler = async () => {
-    const toastId = toast.loading("Logging Out");
-    const data = await axios.get(API_URL + "/user/logout", {
-      withCredentials: true,
-    });
-    const { message } = data?.data;
-    toast.success(message, { id: toastId });
-    dispatch({ type: "USER_DATA", payload: {} });
-    navigate("/");
+  const logoutBtnHandler = () => {
+    logoutUser(dispatch, navigate);
   };
 
   return (
@@ -150,7 +117,7 @@ export const UserDetails = ({ userData, dispatch }) => {
                   type="button"
                   variant="danger"
                   className="w-100 fw-semibold"
-                  onClick={logoutHandler}
+                  onClick={logoutBtnHandler}
                 >
                   Logout
                 </Button>

@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import axios from "axios";
 
 import { Login } from "../components/Login";
 import { UserDataContext } from "../contexts/UserDataContext";
-import { API_URL } from "../utils/constants";
+import { loginUser } from "../services/authentication/loginUser";
 
 export const LoginPage = () => {
   const { state, dispatch } = useContext(UserDataContext);
@@ -23,29 +21,8 @@ export const LoginPage = () => {
     setUserData(data);
   };
 
-  const formSubmitHandler = async (e) => {
-    e.preventDefault();
-    if (userData.username.trim().length === 0) {
-      toast.error("Username cannot be empty");
-    } else if (userData.password.length === 0) {
-      toast.error("Password cannot be empty");
-    } else {
-      const toastId = toast.loading("Logging In");
-      try {
-        dispatch({ type: "USER_DATA_LOADING" });
-        const data = await axios.post(API_URL + "/user/login", userData, {
-          withCredentials: true,
-        });
-        const { message, user } = data?.data;
-        toast.success(message, { id: toastId });
-        dispatch({ type: "USER_DATA", payload: user });
-        navigate("/dashboard");
-      } catch (error) {
-        dispatch({ type: "USER_DATA_ERROR" });
-        const { message } = error?.response?.data;
-        toast.error(message, { id: toastId });
-      }
-    }
+  const formSubmitHandler = (e) => {
+    loginUser(e, userData, dispatch, navigate);
   };
 
   useEffect(() => {
