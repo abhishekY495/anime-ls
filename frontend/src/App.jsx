@@ -11,6 +11,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { UserDataContext } from "./contexts/UserDataContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { isAuthenticated } from "./services/authentication/isAuthenticated";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 export const App = () => {
   const { dispatch } = useContext(UserDataContext);
@@ -45,6 +46,7 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
