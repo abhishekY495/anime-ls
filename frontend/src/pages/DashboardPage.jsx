@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import { UserDataContext } from "../contexts/UserDataContext";
 import { UserDetails } from "../components/UserDetails";
@@ -15,6 +16,8 @@ export const DashboardPage = () => {
     state: { userData },
     dispatch,
   } = useContext(UserDataContext);
+  const { privateLists, publicLists } = userData;
+  const [activeList, setActiveList] = useState("private");
   const navigate = useNavigate();
 
   const logoutHandler = () => {
@@ -46,6 +49,25 @@ export const DashboardPage = () => {
             </Accordion.Item>
           </Accordion>
           {/*  */}
+          <div className="mt-3">
+            <Button
+              variant={`${
+                activeList === "private" ? "info" : "secondary"
+              } fw-semibold`}
+              onClick={() => setActiveList("private")}
+              className="me-2"
+            >
+              Private ({privateLists.length})
+            </Button>
+            <Button
+              variant={`${
+                activeList === "public" ? "info" : "secondary"
+              } fw-semibold`}
+              onClick={() => setActiveList("public")}
+            >
+              Public ({publicLists.length})
+            </Button>
+          </div>
         </Col>
       </Row>
     </Container>

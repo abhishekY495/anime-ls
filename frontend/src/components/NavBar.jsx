@@ -20,7 +20,7 @@ export const NavBar = () => {
       <Container>
         <Link className="navbar-brand text-light fs-3 fw-semibold" to="/">
           <Navbar.Brand className="text-light fs-3 fw-semibold">
-            ALS
+            Anime
             <span title="list">📃</span>
           </Navbar.Brand>
         </Link>
