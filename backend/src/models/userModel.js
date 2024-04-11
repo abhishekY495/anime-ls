@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 const animeSchema = new mongoose.Schema({
   title: { type: String, required: true },
   coverImage: { type: String, required: true },
-  score: { type: Number, required: true },
   link: { type: String, required: true },
 });
 
