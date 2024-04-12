@@ -24,7 +24,8 @@ export const RegisterPage = () => {
   };
 
   const formSubmitHandler = (e) => {
-    registerUser(e, userData, dispatch, navigate);
+    e.preventDefault();
+    registerUser(userData, dispatch, navigate);
   };
 
   useEffect(() => {

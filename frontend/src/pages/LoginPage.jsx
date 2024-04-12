@@ -22,7 +22,8 @@ export const LoginPage = () => {
   };
 
   const formSubmitHandler = (e) => {
-    loginUser(e, userData, dispatch, navigate);
+    e.preventDefault();
+    loginUser(userData, dispatch, navigate);
   };
 
   useEffect(() => {

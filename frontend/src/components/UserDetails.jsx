@@ -42,8 +42,9 @@ export const UserDetails = ({ userData, dispatch }) => {
   };
 
   const formSubmitHandler = async (e) => {
+    e.preventDefault();
+
     updateUser(
-      e,
       fullname,
       email,
       password,

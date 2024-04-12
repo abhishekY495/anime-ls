@@ -8,7 +8,6 @@ const UPDATE_DETAILS_API_URL = API_URL + "/user/profile";
 const token = localStorage.getItem("token");
 
 export const updateUser = async (
-  e,
   fullname,
   email,
   password,
@@ -16,7 +15,6 @@ export const updateUser = async (
   setDisableUpdateBtn,
   setPassword
 ) => {
-  e.preventDefault();
   if (fullname.trim().length === 0) {
     toast.error("Full Name cannot be empty");
   } else if (email.trim().length === 0) {

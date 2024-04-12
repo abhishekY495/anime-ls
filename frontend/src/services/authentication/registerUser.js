@@ -6,8 +6,7 @@ import { validEmailFormat } from "../../utils/validEmailFormat";
 
 const REGISTER_API_URL = API_URL + "/user/register";
 
-export const registerUser = async (e, userData, dispatch, navigate) => {
-  e.preventDefault();
+export const registerUser = async (userData, dispatch, navigate) => {
   if (userData.fullname.trim().length === 0) {
     toast.error("Full Name cannot be empty");
   } else if (userData.username.trim().length === 0) {

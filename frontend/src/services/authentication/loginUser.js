@@ -5,8 +5,7 @@ import { API_URL } from "../../utils/constants";
 
 const LOGIN_API_URL = API_URL + "/user/login";
 
-export const loginUser = async (e, userData, dispatch, navigate) => {
-  e.preventDefault();
+export const loginUser = async (userData, dispatch, navigate) => {
   if (userData.username.trim().length === 0) {
     toast.error("Username cannot be empty");
   } else if (userData.password.length === 0) {
