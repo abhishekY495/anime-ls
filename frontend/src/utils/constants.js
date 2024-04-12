@@ -8,3 +8,5 @@ const deployedAppLink = "https://anime-ls.netlify.app/";
 
 export const API_URL = env === "PROD" ? deployedApiUrl : localApiUrl;
 export const APP_LINK = env === "PROD" ? deployedAppLink : localAppLink;
+
+export const ANIME_SEARCH_API_URL = import.meta.env.VITE_ANIME_SEARCH_API_URL;

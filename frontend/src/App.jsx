@@ -12,6 +12,8 @@ import { UserDataContext } from "./contexts/UserDataContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { isAuthenticated } from "./services/authentication/isAuthenticated";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { SearchPage } from "./pages/SearchPage";
+import "./style.css";
 
 export const App = () => {
   const { dispatch } = useContext(UserDataContext);
@@ -27,7 +29,7 @@ export const App = () => {
   }, []);
 
   return (
-    <>
+    <div className="main-app">
       <Toaster
         position="top-center"
         toastOptions={{ style: { background: "#404040", color: "#fff" } }}
@@ -46,8 +48,16 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/search"
+          element={
+            <ProtectedRoute>
+              <SearchPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
-    </>
+    </div>
   );
 };

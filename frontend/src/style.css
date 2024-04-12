@@ -1,0 +1,72 @@
+.anime-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin-top: 20px;
+  row-gap: 100px;
+  column-gap: 25px;
+}
+
+.main-app {
+  margin-bottom: 200px;
+}
+
+.anime {
+  height: 360px;
+  width: 240px;
+  border: 1px solid #404040;
+}
+.anime:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}
+.anime-title {
+  border: 1px solid #404040;
+  padding: 2px 5px 5px 6px;
+}
+
+.anime > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.pagination-container {
+  width: fit-content;
+  margin: auto;
+  margin-top: 80px;
+}
+
+@media (max-width: 993px) {
+  .anime-list {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 90px;
+    column-gap: 0px;
+  }
+}
+
+@media (max-width: 600px) {
+  .anime {
+    width: 200px;
+    height: 350px;
+  }
+  .anime-list {
+    row-gap: 90px;
+  }
+}
+
+@media (max-width: 500px) {
+  .anime-list {
+    row-gap: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .anime-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .anime {
+    width: 240px;
+    height: 360px;
+  }
+}
