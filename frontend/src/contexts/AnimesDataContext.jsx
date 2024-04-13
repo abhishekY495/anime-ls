@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-import { animesDataReducer, initState } from "../reducers/animesDataReducer";
+import { initState, animesDataReducer } from "../reducers/animesDataReducer";
 
 export const AnimesDataContext = createContext();
 export const AnimesDataContextProvider = ({ children }) => {
