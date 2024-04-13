@@ -1,25 +1,32 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { NavBar } from "./components/NavBar";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { HomePage } from "./pages/HomePage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { LoginPage } from "./pages/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
-import { UserDataContext } from "./contexts/UserDataContext";
-import { ProtectedRoute } from "./components/ProtectedRoute";
-import { isAuthenticated } from "./services/authentication/isAuthenticated";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SearchPage } from "./pages/SearchPage";
+import { DisclaimerModal } from "./components/modals/DisclaimerModal";
+import { UserDataContext } from "./contexts/UserDataContext";
+import { isAuthenticated } from "./services/authentication/isAuthenticated";
+import { isServerLive } from "./services/isServerLive";
 import "./style.css";
 
 export const App = () => {
+  const [serverLive, setServerLive] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(
+    localStorage.getItem("showDisclaimer") === "false" ? false : true
+  );
   const { dispatch } = useContext(UserDataContext);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    isServerLive(setServerLive);
     if (token !== null) {
       isAuthenticated(token, dispatch);
     } else {
@@ -30,6 +37,7 @@ export const App = () => {
 
   return (
     <div className="main-app">
+      {showDisclaimer && <DisclaimerModal serverLive={serverLive} />}
       <Toaster
         position="top-center"
         toastOptions={{ style: { background: "#404040", color: "#fff" } }}
