@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { searchAnime } from "../services/searchAnimes";
 
 export const AnimeList = ({
@@ -15,7 +16,7 @@ export const AnimeList = ({
     const windowHeight = window.innerHeight;
     const scrollTop = document.documentElement.scrollTop;
 
-    if (windowHeight + scrollTop + 1 > scrollHeight) {
+    if (windowHeight + scrollTop + 10 > scrollHeight) {
       if (pagination?.last_visible_page !== currentPage) {
         setCurrentPage((prevPage) => prevPage + 1);
         searchAnime(searchQuery, currentPage + 1, dispatch);
@@ -32,8 +33,7 @@ export const AnimeList = ({
     <div className="anime-list">
       {animesData?.map((anime) => {
         return (
-          <Link
-            to={anime?.url}
+          <div
             className="anime text-decoration-none text-white"
             key={anime?.mal_id}
             target="_blank"
@@ -46,7 +46,7 @@ export const AnimeList = ({
             <p className="text-truncate fs-5 fw-semibold anime-title">
               {anime?.title_english || anime?.title}
             </p>
-          </Link>
+          </div>
         );
       })}
     </div>
