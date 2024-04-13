@@ -42,6 +42,7 @@ export const SearchPage = () => {
 
   useEffect(() => {
     dispatch({ type: "CLEAR_ANIMES_DATA" });
+    return () => dispatch({ type: "CLEAR_ANIMES_DATA" });
   }, []);
 
   useEffect(() => {
@@ -57,8 +58,9 @@ export const SearchPage = () => {
             <img
               className="position-fixed z-1 bg-light rounded-circle"
               style={{
+                width: "35px",
                 bottom: "50px",
-                right: "50px",
+                right: "40px",
                 cursor: "pointer",
               }}
               onClick={goToTop}
