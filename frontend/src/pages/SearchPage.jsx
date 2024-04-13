@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,8 +9,10 @@ import Spinner from "react-bootstrap/Spinner";
 import { AnimesDataContext } from "../contexts/AnimesDataContext";
 import { AnimeList } from "../components/AnimeList";
 import { searchAnime } from "../services/searchAnimes";
+import upArrow from "../assets/up-arrow.png";
 
 export const SearchPage = () => {
+  const [showGoUpButton, setShowGoUpButtom] = useState(false);
   const {
     state: {
       searchQuery,
@@ -27,14 +29,45 @@ export const SearchPage = () => {
     searchAnime(searchQuery, 1, dispatch);
   };
 
+  const goToTop = () => window.scrollTo(0, 0);
+
+  const showGoUpButtonHandler = () => {
+    const scrollTop = document.documentElement.scrollTop;
+    if (scrollTop > 800) {
+      setShowGoUpButtom(true);
+    } else {
+      setShowGoUpButtom(false);
+    }
+  };
+
   useEffect(() => {
     dispatch({ type: "CLEAR_ANIMES_DATA" });
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", showGoUpButtonHandler);
+    return () => window.removeEventListener("scroll", showGoUpButtonHandler);
+  });
 
   return (
     <Container>
       <Row>
         <Col md={1} className="m-auto mt-3" style={{ width: "900px" }}>
+          {showGoUpButton && (
+            <img
+              className="position-fixed z-1 bg-light rounded-circle"
+              style={{
+                bottom: "50px",
+                right: "50px",
+                cursor: "pointer",
+              }}
+              onClick={goToTop}
+              src={upArrow}
+              alt="go to top"
+              role="button"
+            />
+          )}
+          {/*  */}
           <Form onSubmit={formSubmitHandler} className="d-flex">
             <Form.Control
               type="search"
@@ -54,6 +87,7 @@ export const SearchPage = () => {
               Search
             </Button>
           </Form>
+          {/*  */}
           {animesData?.length !== 0 && (
             <AnimeList
               animesData={animesData}
