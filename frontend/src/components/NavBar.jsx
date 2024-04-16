@@ -25,16 +25,14 @@ export const NavBar = () => {
           </Navbar.Brand>
         </Link>
         <Link to={userData?.username ? "/dashboard" : "/login"}>
-          <Navbar.Brand>
-            <Navbar.Text>
-              <img
-                src={dashboardIcon}
-                alt="profile"
-                style={{ width: "32px" }}
-                className="rounded-circle"
-              />
-            </Navbar.Text>
-          </Navbar.Brand>
+          <Navbar.Text>
+            <img
+              src={dashboardIcon}
+              alt="profile"
+              style={{ width: "32px" }}
+              className="rounded-circle"
+            />
+          </Navbar.Text>
         </Link>
       </Container>
     </Navbar>

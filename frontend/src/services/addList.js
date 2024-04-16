@@ -1,0 +1,43 @@
+import axios from "axios";
+import toast from "react-hot-toast";
+
+import { API_URL } from "../utils/constants";
+
+const token = localStorage.getItem("token");
+
+export const addList = async (
+  listName,
+  isPrivate,
+  hideNewListModal,
+  dispatch
+) => {
+  if (listName.trim().length === 0) {
+    toast.error("Cannot be empty");
+  } else {
+    const toastId = toast.loading("Adding list");
+    try {
+      dispatch({ type: "ADD_LIST_LOADING" });
+      const ADD_LIST_API_URL =
+        API_URL + `/user/${isPrivate ? "privatelist" : "publiclist"}`;
+      const data = await axios.put(
+        ADD_LIST_API_URL,
+        { listName },
+        {
+          headers: { Authorization: token },
+        }
+      );
+      const { message, user } = data?.data;
+      setTimeout(() => {
+        toast.success(message, { id: toastId });
+        dispatch({ type: "ADD_LIST", payload: user });
+        hideNewListModal();
+      }, 1500);
+    } catch (error) {
+      setTimeout(() => {
+        dispatch({ type: "ADD_LIST_ERROR" });
+        const { message } = error?.response?.data;
+        toast.error(message, { id: toastId });
+      }, 1500);
+    }
+  }
+};

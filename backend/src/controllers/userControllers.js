@@ -98,3 +98,121 @@ export const userProfile = tryCatchAsyncHandler(async (req, res) => {
   const user = req.user;
   res.json({ user });
 });
+
+export const addPrivateList = tryCatchAsyncHandler(async (req, res) => {
+  const user = req.user;
+  const { listName } = req.body;
+
+  const listNameExists = user.privateLists.some(
+    (list) => list.listName === listName
+  );
+  if (listNameExists) {
+    res.status(400);
+    throw new Error("List Name already exists");
+  }
+
+  user.privateLists = [...user.privateLists, { listName, animes: [] }];
+  const updatedUser = await user.save();
+
+  res.json({
+    message: listName + " Added",
+    user: {
+      fullname: updatedUser.fullname,
+      email: updatedUser.email,
+      username: updatedUser.username,
+      publicLists: updatedUser.publicLists,
+      privateLists: updatedUser.privateLists,
+    },
+  });
+});
+export const addPublicList = tryCatchAsyncHandler(async (req, res) => {
+  const user = req.user;
+  const { listName } = req.body;
+
+  const listNameExists = user.publicLists.some(
+    (list) => list.listName === listName
+  );
+  if (listNameExists) {
+    res.status(400);
+    throw new Error("List Name already exists");
+  }
+
+  user.publicLists = [...user.publicLists, { listName, animes: [], hits: 0 }];
+  const updatedUser = await user.save();
+
+  res.json({
+    message: listName + " Added",
+    user: {
+      fullname: updatedUser.fullname,
+      email: updatedUser.email,
+      username: updatedUser.username,
+      publicLists: updatedUser.publicLists,
+      privateLists: updatedUser.privateLists,
+    },
+  });
+});
+
+export const deletePrivateList = tryCatchAsyncHandler(async (req, res) => {
+  const user = req.user;
+  const { listId } = req.body;
+
+  if (!listId) {
+    res.status(400);
+    throw new Error("listId is required");
+  }
+
+  const checkIfListExists = user.privateLists.some(
+    (list) => String(list._id) === String(listId)
+  );
+  if (!checkIfListExists) {
+    res.status(404);
+    throw new Error("List not found");
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    user._id,
+    {
+      $pull: {
+        privateLists: { _id: listId },
+      },
+    },
+    { new: true, select: "-password" }
+  );
+
+  res.json({
+    message: "Deleted Successfully",
+    user: updatedUser,
+  });
+});
+export const deletePublicList = tryCatchAsyncHandler(async (req, res) => {
+  const user = req.user;
+  const { listId } = req.body;
+
+  if (!listId) {
+    res.status(400);
+    throw new Error("listId is required");
+  }
+
+  const checkIfListExists = user.publicLists.some(
+    (list) => String(list._id) === String(listId)
+  );
+  if (!checkIfListExists) {
+    res.status(404);
+    throw new Error("List not found");
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    user._id,
+    {
+      $pull: {
+        publicLists: { _id: listId },
+      },
+    },
+    { new: true, select: "-password" }
+  );
+
+  res.json({
+    message: "Deleted Successfully",
+    user: updatedUser,
+  });
+});

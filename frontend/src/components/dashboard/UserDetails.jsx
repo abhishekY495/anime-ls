@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-import { updateUser } from "../services/updateUser";
+import { updateUser } from "../../services/updateUser";
 
 export const UserDetails = ({ userData, dispatch }) => {
   const [fullname, setFullname] = useState(userData?.fullname);
@@ -43,7 +43,6 @@ export const UserDetails = ({ userData, dispatch }) => {
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-
     updateUser(
       fullname,
       email,
@@ -112,16 +111,6 @@ export const UserDetails = ({ userData, dispatch }) => {
                   Update
                 </Button>
               </Col>
-              {/* <Col>
-                <Button
-                  type="button"
-                  variant="danger"
-                  className="w-100 fw-semibold"
-                  onClick={logoutBtnHandler}
-                >
-                  Logout
-                </Button>
-              </Col> */}
             </Row>
           </Form>
         </Col>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { searchAnime } from "../services/searchAnimes";
+import { OptionsModal } from "./modals/OptionsModal";
 
 export const AnimeList = ({
   animesData,
@@ -9,6 +10,11 @@ export const AnimeList = ({
   searchQuery,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [showOptionsModal, setShowOptionsModal] = useState(false);
+  const [animeDetails, setAnimeDetails] = useState({});
+
+  const openOptionsModal = (details) => setShowOptionsModal(true);
+  const closeOptionsModal = () => setShowOptionsModal(false);
 
   const infiniteScrollHandler = () => {
     const scrollHeight = document.documentElement.scrollHeight;
@@ -30,6 +36,10 @@ export const AnimeList = ({
 
   return (
     <div className="anime-list">
+      <OptionsModal
+        showOptionsModal={showOptionsModal}
+        closeOptionsModal={closeOptionsModal}
+      />
       {animesData?.map((anime) => {
         return (
           <div
@@ -37,6 +47,7 @@ export const AnimeList = ({
             key={anime?.mal_id}
             target="_blank"
             title={anime?.title_english || anime?.title}
+            onClick={() => openOptionsModal(anime)}
           >
             <img
               src={anime?.images?.webp?.large_image_url}

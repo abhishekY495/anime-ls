@@ -7,7 +7,9 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 import { UserDataContext } from "../contexts/UserDataContext";
-import { UserDetails } from "../components/UserDetails";
+import { UserDetails } from "../components/dashboard/UserDetails";
+import { PrivateLists } from "../components/dashboard/PrivateLists";
+import { PublicLists } from "../components/dashboard/PublicLists";
 import { logoutUser } from "../services/authentication/logoutUser";
 import logoutIcon from "../assets/logout-icon.png";
 
@@ -38,7 +40,7 @@ export const DashboardPage = () => {
               onClick={logoutHandler}
             />
           </div>
-          <Accordion className="pb-3 border-bottom">
+          <Accordion className="">
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 <p className="fs-5 mb-1 fw-semibold">Account Details</p>
@@ -49,7 +51,7 @@ export const DashboardPage = () => {
             </Accordion.Item>
           </Accordion>
           {/*  */}
-          <div className="mt-3 d-flex justify-content-between">
+          <div className="mt-3 d-flex justify-content-between border-bottom pb-3">
             <div>
               <Button
                 variant={`${
@@ -73,6 +75,7 @@ export const DashboardPage = () => {
               Search
             </Link>
           </div>
+          {activeList === "private" ? <PrivateLists /> : <PublicLists />}
         </Col>
       </Row>
     </Container>

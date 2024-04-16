@@ -37,6 +37,14 @@
   margin-top: 80px;
 }
 
+.add-new {
+  background-color: #282d31 !important;
+}
+.add-new:hover {
+  cursor: pointer;
+  background: #1e2124 !important;
+}
+
 @media (max-width: 993px) {
   .anime-list {
     grid-template-columns: repeat(2, 1fr);

@@ -3,6 +3,9 @@ export const initState = {
   userDataLoading: false,
   userDataError: false,
   authenticatingUser: true,
+  //
+  addListLoading: false,
+  addListError: false,
 };
 
 export const userDataReducer = (state, action) => {
@@ -26,6 +29,30 @@ export const userDataReducer = (state, action) => {
         userDataLoading: false,
         userDataError: true,
         authenticatingUser: false,
+      };
+    }
+    //
+    case "ADD_LIST_LOADING": {
+      return {
+        ...state,
+        addListLoading: true,
+        addListError: false,
+      };
+    }
+    case "ADD_LIST": {
+      const data = action.payload;
+      return {
+        ...state,
+        userData: data,
+        addListLoading: false,
+        addListError: false,
+      };
+    }
+    case "ADD_LIST_ERROR": {
+      return {
+        ...state,
+        addListLoading: false,
+        addListError: true,
       };
     }
   }
