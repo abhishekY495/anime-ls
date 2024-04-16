@@ -26,9 +26,9 @@ userRoutes.get("/profile", isAuthenticated, userProfile);
 userRoutes
   .route("/privatelist")
   .put(isAuthenticated, addListValidation, addPrivateList)
-  .delete(isAuthenticated, deletePrivateList);
+  .patch(isAuthenticated, deletePrivateList);
 
 userRoutes
   .route("/publiclist")
   .put(isAuthenticated, addListValidation, addPublicList)
-  .delete(isAuthenticated, deletePublicList);
+  .patch(isAuthenticated, deletePublicList);

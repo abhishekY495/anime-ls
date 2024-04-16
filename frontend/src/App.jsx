@@ -11,11 +11,11 @@ import { LoginPage } from "./pages/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SearchPage } from "./pages/SearchPage";
+import { ListsPage } from "./pages/ListsPage";
 import { DisclaimerModal } from "./components/modals/DisclaimerModal";
 import { UserDataContext } from "./contexts/UserDataContext";
 import { isAuthenticated } from "./services/authentication/isAuthenticated";
 import { isServerLive } from "./services/isServerLive";
-import "./style.css";
 
 export const App = () => {
   const [serverLive, setServerLive] = useState(false);
@@ -61,6 +61,14 @@ export const App = () => {
           element={
             <ProtectedRoute>
               <SearchPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lists"
+          element={
+            <ProtectedRoute>
+              <ListsPage />
             </ProtectedRoute>
           }
         />

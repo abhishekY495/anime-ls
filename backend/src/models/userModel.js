@@ -10,7 +10,7 @@ const animeSchema = new mongoose.Schema({
 const publicListSchema = new mongoose.Schema({
   listName: { type: String, required: true },
   animes: { type: [animeSchema] },
-  hits: { type: Number, required: true, default: 0 },
+  views: { type: Number, required: true, default: 0 },
 });
 const privateListSchema = new mongoose.Schema({
   listName: { type: String, required: true },

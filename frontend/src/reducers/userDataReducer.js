@@ -6,6 +6,9 @@ export const initState = {
   //
   addListLoading: false,
   addListError: false,
+  //
+  deleteListLoading: false,
+  deleteListError: false,
 };
 
 export const userDataReducer = (state, action) => {
@@ -53,6 +56,30 @@ export const userDataReducer = (state, action) => {
         ...state,
         addListLoading: false,
         addListError: true,
+      };
+    }
+    //
+    case "DELETE_LIST_LOADING": {
+      return {
+        ...state,
+        deleteListLoading: true,
+        deleteListError: false,
+      };
+    }
+    case "DELETE_LIST": {
+      const data = action.payload;
+      return {
+        ...state,
+        userData: data,
+        deleteListLoading: false,
+        deleteListError: false,
+      };
+    }
+    case "DELETE_LIST_ERROR": {
+      return {
+        ...state,
+        deleteListLoading: false,
+        deleteListError: true,
       };
     }
   }

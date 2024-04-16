@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-import { updateUser } from "../../services/updateUser";
+import { updateUser } from "../services/updateUser";
 
 export const UserDetails = ({ userData, dispatch }) => {
   const [fullname, setFullname] = useState(userData?.fullname);

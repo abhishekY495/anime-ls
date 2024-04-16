@@ -137,7 +137,7 @@ export const addPublicList = tryCatchAsyncHandler(async (req, res) => {
     throw new Error("List Name already exists");
   }
 
-  user.publicLists = [...user.publicLists, { listName, animes: [], hits: 0 }];
+  user.publicLists = [...user.publicLists, { listName, animes: [], views: 0 }];
   const updatedUser = await user.save();
 
   res.json({

@@ -27,17 +27,13 @@ export const addList = async (
         }
       );
       const { message, user } = data?.data;
-      setTimeout(() => {
-        toast.success(message, { id: toastId });
-        dispatch({ type: "ADD_LIST", payload: user });
-        hideNewListModal();
-      }, 1500);
+      toast.success(message, { id: toastId });
+      dispatch({ type: "ADD_LIST", payload: user });
+      hideNewListModal();
     } catch (error) {
-      setTimeout(() => {
-        dispatch({ type: "ADD_LIST_ERROR" });
-        const { message } = error?.response?.data;
-        toast.error(message, { id: toastId });
-      }, 1500);
+      dispatch({ type: "ADD_LIST_ERROR" });
+      const { message } = error?.response?.data;
+      toast.error(message, { id: toastId });
     }
   }
 };

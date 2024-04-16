@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./AnimeList.css";
 
 import { searchAnime } from "../services/searchAnimes";
 import { OptionsModal } from "./modals/OptionsModal";

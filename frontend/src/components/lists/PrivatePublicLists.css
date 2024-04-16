@@ -1,0 +1,31 @@
+.private-lists,
+.public-lists {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.my-list:hover {
+  opacity: 0.9;
+}
+
+.public-btn-group,
+.private-btn-group {
+  flex-direction: column;
+  gap: 10px !important;
+}
+
+@media (max-width: 768px) {
+  .private-lists,
+  .public-lists {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 550px) {
+  .private-btn-group {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+}
