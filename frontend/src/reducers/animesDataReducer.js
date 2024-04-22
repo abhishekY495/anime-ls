@@ -5,6 +5,8 @@ export const initState = {
   animesDataLoading: false,
   animesDataError: false,
   animesDataErrorMessage: "",
+  selectedAnime: {},
+  selectedListId: "",
 };
 
 export const animesDataReducer = (state, action) => {
@@ -53,6 +55,14 @@ export const animesDataReducer = (state, action) => {
         animesDataError: false,
         animesDataErrorMessage: "",
       };
+    }
+    case "SET_SELECTED_ANIME": {
+      const anime = action.payload;
+      return { ...state, selectedAnime: anime };
+    }
+    case "SET_SELECTED_LIST": {
+      const listId = action.payload;
+      return { ...state, selectedListId: listId };
     }
   }
 };

@@ -5,7 +5,11 @@ import Modal from "react-bootstrap/Modal";
 import { PrivateListsModal } from "./PrivateListsModal";
 import { PublicListsModal } from "./PublicListsModal";
 
-export const OptionsModal = ({ showOptionsModal, closeOptionsModal }) => {
+export const OptionsModal = ({
+  showOptionsModal,
+  closeOptionsModal,
+  openOptionsModal,
+}) => {
   const [showPublicListsModal, setShowPublicListsModal] = useState(false);
   const [showPrivateListsModal, setShowPrivateListsModal] = useState(false);
 
@@ -26,12 +30,14 @@ export const OptionsModal = ({ showOptionsModal, closeOptionsModal }) => {
       <PrivateListsModal
         showPrivateListsModal={showPrivateListsModal}
         closePrivateListsModal={closePrivateListsModal}
+        openOptionsModal={openOptionsModal}
       />
       <PublicListsModal
         showPublicListsModal={showPublicListsModal}
         closePublicListsModal={closePublicListsModal}
+        openOptionsModal={openOptionsModal}
       />
-      <Modal show={showOptionsModal} onHide={closeOptionsModal} size="sm">
+      <Modal show={showOptionsModal} onHide={closeOptionsModal}>
         <Modal.Header closeButton className="p-2 ps-3 pe-3">
           <Modal.Title>Add to</Modal.Title>
         </Modal.Header>

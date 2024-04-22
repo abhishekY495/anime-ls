@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./AnimeList.css";
 
 import { searchAnime } from "../services/searchAnimes";
 import { OptionsModal } from "./modals/OptionsModal";
+import { AnimesDataContext } from "../contexts/AnimesDataContext";
 
 export const AnimeList = ({
   animesData,
@@ -14,7 +15,7 @@ export const AnimeList = ({
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [animeDetails, setAnimeDetails] = useState({});
 
-  const openOptionsModal = (details) => setShowOptionsModal(true);
+  const openOptionsModal = () => setShowOptionsModal(true);
   const closeOptionsModal = () => setShowOptionsModal(false);
 
   const infiniteScrollHandler = () => {
@@ -30,6 +31,17 @@ export const AnimeList = ({
     }
   };
 
+  const selectAnime = (anime) => {
+    openOptionsModal();
+    const animeData = {
+      title: anime.title,
+      coverImage:
+        anime.images.webp.large_image_url || anime.images.webp.image_url,
+      link: anime.url,
+    };
+    dispatch({ type: "SET_SELECTED_ANIME", payload: animeData });
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", infiniteScrollHandler);
     return () => window.removeEventListener("scroll", infiniteScrollHandler);
@@ -39,6 +51,7 @@ export const AnimeList = ({
     <div className="anime-list">
       <OptionsModal
         showOptionsModal={showOptionsModal}
+        openOptionsModal={openOptionsModal}
         closeOptionsModal={closeOptionsModal}
       />
       {animesData?.map((anime) => {
@@ -48,7 +61,7 @@ export const AnimeList = ({
             key={anime?.mal_id}
             target="_blank"
             title={anime?.title_english || anime?.title}
-            onClick={() => openOptionsModal(anime)}
+            onClick={() => selectAnime(anime)}
           >
             <img
               src={anime?.images?.webp?.large_image_url}

@@ -15,7 +15,9 @@ export const AddNew = ({ isPrivate }) => {
         className="mt-3 d-flex justify-content-center border p-2 bg-secondary rounded add-new"
         onClick={() => setShowNewListModal(true)}
       >
-        <span className="text-muted fw-semibold">+ Add New</span>
+        <span className="text-muted fw-semibold">
+          + Add New {isPrivate ? "Private" : "Public"} List
+        </span>
       </div>
     </>
   );

@@ -216,3 +216,70 @@ export const deletePublicList = tryCatchAsyncHandler(async (req, res) => {
     user: updatedUser,
   });
 });
+
+export const addAnimeToPrivateList = tryCatchAsyncHandler(async (req, res) => {
+  const { animeData, listId, user } = req;
+
+  const privateList = user.privateLists.find(
+    (list) => String(list._id) === String(listId)
+  );
+  if (!privateList) {
+    res.status(400);
+    throw new Error("No list found.");
+  }
+
+  const isAnimeInList = privateList.animes.some(
+    (anime) => anime.title === animeData.title
+  );
+  if (isAnimeInList) {
+    res.status(400);
+    throw new Error("Anime is already added.");
+  }
+
+  privateList.animes.push(animeData);
+  const updatedUser = await user.save();
+
+  res.json({
+    message: "Anime Added",
+    user: {
+      fullname: updatedUser.fullname,
+      email: updatedUser.email,
+      username: updatedUser.username,
+      publicLists: updatedUser.publicLists,
+      privateLists: updatedUser.privateLists,
+    },
+  });
+});
+export const addAnimeToPublicList = tryCatchAsyncHandler(async (req, res) => {
+  const { animeData, listId, user } = req;
+
+  const publicList = user.publicLists.find(
+    (list) => String(list._id) === String(listId)
+  );
+  if (!publicList) {
+    res.status(400);
+    throw new Error("No list found.");
+  }
+
+  const isAnimeInList = publicList.animes.some(
+    (anime) => anime.title === animeData.title
+  );
+  if (isAnimeInList) {
+    res.status(400);
+    throw new Error("Anime is already added.");
+  }
+
+  publicList.animes.push({ ...animeData, views: 0 });
+  const updatedUser = await user.save();
+
+  res.json({
+    message: "Anime Added",
+    user: {
+      fullname: updatedUser.fullname,
+      email: updatedUser.email,
+      username: updatedUser.username,
+      publicLists: updatedUser.publicLists,
+      privateLists: updatedUser.privateLists,
+    },
+  });
+});

@@ -9,6 +9,9 @@ export const initState = {
   //
   deleteListLoading: false,
   deleteListError: false,
+  //
+  addAnimeLoading: false,
+  addAnimeError: false,
 };
 
 export const userDataReducer = (state, action) => {
@@ -82,5 +85,30 @@ export const userDataReducer = (state, action) => {
         deleteListError: true,
       };
     }
+    //
+    case "ADD_ANIME_TO_LIST_LOADING": {
+      return {
+        ...state,
+        addAnimeLoading: true,
+        addAnimeError: false,
+      };
+    }
+    case "ADD_ANIME_TO_LIST": {
+      const data = action.payload;
+      return {
+        ...state,
+        userData: data,
+        addAnimeLoading: false,
+        addAnimeError: false,
+      };
+    }
+    case "ADD_ANIME_TO_LIST_ERROR": {
+      return {
+        ...state,
+        addAnimeLoading: false,
+        addAnimeError: true,
+      };
+    }
+    //
   }
 };
