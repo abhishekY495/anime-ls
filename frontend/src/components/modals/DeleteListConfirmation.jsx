@@ -29,8 +29,8 @@ export const DeleteListConfirmation = ({
         <p className="m-0 mb-3">
           By clicking the{" "}
           <span className="fw-semibold text-danger-emphasis">Delete</span>{" "}
-          button below, the list be permanently deleted. This action cannot be
-          reversed.
+          button below, the list will be permanently deleted. This action cannot
+          be reversed.
         </p>
         <Button
           variant="danger"
