@@ -35,7 +35,7 @@ export const DashboardPage = () => {
               onClick={logoutHandler}
             />
           </div>
-          <Accordion defaultActiveKey="0">
+          <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 <p className="fs-5 mb-1 fw-semibold">Account Details</p>
