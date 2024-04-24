@@ -14,7 +14,14 @@ export const ListsPage = () => {
     state: { userData },
   } = useContext(UserDataContext);
   const { privateLists, publicLists } = userData;
-  const [activeList, setActiveList] = useState("private");
+  const [activeList, setActiveList] = useState(
+    localStorage.getItem("activeList") === "private" ? "private" : "public"
+  );
+
+  const btnClickHandler = (e) => {
+    localStorage.setItem("activeList", e.target.name);
+    setActiveList(e.target.name);
+  };
 
   return (
     <Container>
@@ -24,13 +31,13 @@ export const ListsPage = () => {
             Your Lists
           </p>
           <div className="d-flex justify-content-between mt-2">
-            <div>
+            <div className="d-flex gap-2">
               <Button
                 variant={`${
                   activeList === "private" ? "info" : "secondary"
                 } fw-semibold`}
-                onClick={() => setActiveList("private")}
-                className="me-2"
+                onClick={btnClickHandler}
+                name="private"
               >
                 Private ({privateLists.length})
               </Button>
@@ -38,7 +45,8 @@ export const ListsPage = () => {
                 variant={`${
                   activeList === "public" ? "info" : "secondary"
                 } fw-semibold`}
-                onClick={() => setActiveList("public")}
+                onClick={btnClickHandler}
+                name="public"
               >
                 Public ({publicLists.length})
               </Button>
