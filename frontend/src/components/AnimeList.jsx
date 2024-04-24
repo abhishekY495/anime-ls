@@ -67,7 +67,10 @@ export const AnimeList = ({
               src={anime?.images?.webp?.large_image_url}
               alt={anime?.title_english || anime?.title}
             />
-            <p className="text-truncate fs-5 fw-semibold anime-title">
+            <p
+              className="text-truncate fs-5 fw-semibold anime-title"
+              style={{ paddingLeft: "10px" }}
+            >
               {anime?.title_english || anime?.title}
             </p>
           </div>
