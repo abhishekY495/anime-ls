@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 
-import editIcon from "../../assets/edit.png";
 import shareIcon from "../../assets/share.png";
 import deleteIcon from "../../assets/delete.png";
 import { DeleteListConfirmation } from "../modals/DeleteListConfirmation";
@@ -25,13 +24,6 @@ export const ButtonGroup = ({ inPrivate, listId }) => {
           inPrivate ? "private-btn-group" : "public-btn-group"
         }`}
       >
-        <Button
-          variant="primary fw-semibold w-100 d-flex justify-content-center align-items-center gap-2"
-          size="sm"
-          title="edit"
-        >
-          <img width="12" height="12" src={editIcon} alt="edit" /> Edit
-        </Button>
         {!inPrivate && (
           <Button
             variant="success fw-semibold w-100 d-flex justify-content-center align-items-center gap-2"
