@@ -9,6 +9,8 @@ import {
   deletePublicList,
   loginUser,
   registerUser,
+  removeAnimeFromPrivateList,
+  removeAnimeFromPublicList,
   updateUser,
   userProfile,
 } from "../controllers/userControllers.js";
@@ -27,29 +29,43 @@ userRoutes.put("/profile", isAuthenticated, updateUserValidation, updateUser);
 userRoutes.get("/profile", isAuthenticated, userProfile);
 //
 userRoutes.put(
-  "/privatelist",
+  "/privatelist/add-list",
   isAuthenticated,
   addListValidation,
   addPrivateList
 );
-userRoutes.patch("/privatelist", isAuthenticated, deletePrivateList);
 userRoutes.patch(
-  "/privatelist/addanime",
+  "/privatelist/delete-list",
+  isAuthenticated,
+  deletePrivateList
+);
+userRoutes.patch(
+  "/privatelist/add-anime",
   isAuthenticated,
   addAnimeValidation,
   addAnimeToPrivateList
 );
-
+userRoutes.patch(
+  "/privatelist/remove-anime",
+  isAuthenticated,
+  removeAnimeFromPrivateList
+);
+//
 userRoutes.put(
-  "/publiclist",
+  "/publiclist/add-list",
   isAuthenticated,
   addListValidation,
   addPublicList
 );
-userRoutes.patch("/publiclist", isAuthenticated, deletePublicList);
+userRoutes.patch("/publiclist/delete-list", isAuthenticated, deletePublicList);
 userRoutes.patch(
-  "/publiclist/addanime",
+  "/publiclist/add-anime",
   isAuthenticated,
   addAnimeValidation,
   addAnimeToPublicList
+);
+userRoutes.patch(
+  "/publiclist/remove-anime",
+  isAuthenticated,
+  removeAnimeFromPublicList
 );

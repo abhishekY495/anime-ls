@@ -18,7 +18,7 @@ export const addList = async (
     try {
       dispatch({ type: "ADD_LIST_LOADING" });
       const ADD_LIST_API_URL =
-        API_URL + `/user/${isPrivate ? "privatelist" : "publiclist"}`;
+        API_URL + `/user/${isPrivate ? "privatelist" : "publiclist"}/add-list`;
       const data = await axios.put(
         ADD_LIST_API_URL,
         { listName },

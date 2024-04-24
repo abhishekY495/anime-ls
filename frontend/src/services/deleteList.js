@@ -15,7 +15,7 @@ export const deleteList = async (
   dispatch({ type: "DELETE_LIST_LOADING" });
   try {
     const response = await axios.patch(
-      API_URL + `/user/${inPrivate ? "privatelist" : "publiclist"}`,
+      API_URL + `/user/${inPrivate ? "privatelist" : "publiclist"}/delete-list`,
       { listId },
       { headers: { Authorization: token } }
     );
