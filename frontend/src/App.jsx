@@ -12,6 +12,8 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SearchPage } from "./pages/SearchPage";
 import { ListsPage } from "./pages/ListsPage";
+import { PrivateListWithAnimes } from "./pages/PrivateListWithAnimes";
+import { PublicListWithAnimes } from "./pages/PublicListWithAnimes";
 import { DisclaimerModal } from "./components/modals/DisclaimerModal";
 import { UserDataContext } from "./contexts/UserDataContext";
 import { isAuthenticated } from "./services/authentication/isAuthenticated";
@@ -69,6 +71,22 @@ export const App = () => {
           element={
             <ProtectedRoute>
               <ListsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/:username/private/:listId"
+          element={
+            <ProtectedRoute>
+              <PrivateListWithAnimes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/:username/public/:listId"
+          element={
+            <ProtectedRoute>
+              <PublicListWithAnimes />
             </ProtectedRoute>
           }
         />

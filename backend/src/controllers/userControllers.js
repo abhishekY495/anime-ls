@@ -43,7 +43,6 @@ export const registerUser = tryCatchAsyncHandler(async (req, res) => {
     },
   });
 });
-
 export const loginUser = tryCatchAsyncHandler(async (req, res) => {
   const { username, password } = req.body;
 
@@ -72,7 +71,6 @@ export const loginUser = tryCatchAsyncHandler(async (req, res) => {
     },
   });
 });
-
 export const updateUser = tryCatchAsyncHandler(async (req, res) => {
   const { fullname, email, password } = req.body;
   const user = req.user;
@@ -283,3 +281,76 @@ export const addAnimeToPublicList = tryCatchAsyncHandler(async (req, res) => {
     },
   });
 });
+
+export const removeAnimeFromPrivateList = tryCatchAsyncHandler(
+  async (req, res) => {
+    const { user } = req;
+    const { animeId, listId } = req.body;
+
+    const privateList = user.privateLists.find(
+      (list) => String(list._id) === String(listId)
+    );
+    if (!privateList) {
+      res.status(400);
+      throw new Error("No list found.");
+    }
+
+    const isAnimeInList = privateList.animes.some(
+      (anime) => String(anime._id) === String(animeId)
+    );
+    if (!isAnimeInList) {
+      res.status(400);
+      throw new Error("No such anime found.");
+    }
+
+    privateList.animes.pull({ _id: animeId });
+    const updatedUser = await user.save();
+
+    res.json({
+      message: "Anime Removed",
+      user: {
+        fullname: updatedUser.fullname,
+        email: updatedUser.email,
+        username: updatedUser.username,
+        publicLists: updatedUser.publicLists,
+        privateLists: updatedUser.privateLists,
+      },
+    });
+  }
+);
+export const removeAnimeFromPublicList = tryCatchAsyncHandler(
+  async (req, res) => {
+    const { user } = req;
+    const { animeId, listId } = req.body;
+
+    const publicList = user.publicLists.find(
+      (list) => String(list._id) === String(listId)
+    );
+    if (!publicList) {
+      res.status(400);
+      throw new Error("No list found.");
+    }
+
+    const isAnimeInList = publicList.animes.some(
+      (anime) => String(anime._id) === String(animeId)
+    );
+    if (!isAnimeInList) {
+      res.status(400);
+      throw new Error("No such anime found.");
+    }
+
+    publicList.animes.pull({ _id: animeId });
+    const updatedUser = await user.save();
+
+    res.json({
+      message: "Anime Removed",
+      user: {
+        fullname: updatedUser.fullname,
+        email: updatedUser.email,
+        username: updatedUser.username,
+        publicLists: updatedUser.publicLists,
+        privateLists: updatedUser.privateLists,
+      },
+    });
+  }
+);

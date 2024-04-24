@@ -12,6 +12,9 @@ export const initState = {
   //
   addAnimeLoading: false,
   addAnimeError: false,
+  //
+  removeAnimeLoading: false,
+  removeAnimeError: false,
 };
 
 export const userDataReducer = (state, action) => {
@@ -110,5 +113,28 @@ export const userDataReducer = (state, action) => {
       };
     }
     //
+    case "REMOVE_ANIME_FROM_LIST_LOADING": {
+      return {
+        ...state,
+        removeAnimeLoading: true,
+        removeAnimeError: false,
+      };
+    }
+    case "REMOVE_ANIME_FROM_LIST": {
+      const data = action.payload;
+      return {
+        ...state,
+        userData: data,
+        removeAnimeLoading: false,
+        removeAnimeError: false,
+      };
+    }
+    case "REMOVE_ANIME_FROM_LIST_ERROR": {
+      return {
+        ...state,
+        removeAnimeLoading: false,
+        removeAnimeError: true,
+      };
+    }
   }
 };

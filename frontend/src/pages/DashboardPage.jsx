@@ -46,10 +46,19 @@ export const DashboardPage = () => {
             </Accordion.Item>
           </Accordion>
           {/*  */}
-          <div className="d-flex gap-2 mt-3">
-            <Link className="btn btn-secondary fw-semibold" to="/lists">
-              Your Lists
-            </Link>
+          <div className="d-flex gap-2 justify-content-between mt-3">
+            <div className="d-flex gap-2">
+              <Link className="btn btn-secondary fw-semibold" to="/lists">
+                Your Lists
+              </Link>
+              <Link
+                className="btn btn-primary fw-semibold"
+                to={`/user/${userData?.username}`}
+                target="_blank"
+              >
+                Visit Public Profile
+              </Link>
+            </div>
             <Link className="btn btn-warning fw-semibold" to="/search">
               Search animes
             </Link>
