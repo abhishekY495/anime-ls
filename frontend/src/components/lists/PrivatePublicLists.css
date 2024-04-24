@@ -29,3 +29,12 @@
     gap: 10px !important;
   }
 }
+
+@media (max-width: 500px) {
+  .private-lists,
+  .public-lists {
+    margin: 0 12%;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+}
