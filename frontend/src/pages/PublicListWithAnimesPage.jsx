@@ -12,7 +12,7 @@ import deleteIcon from "../assets/delete.png";
 import viewsIcon from "../assets/views.png";
 import "../components/lists/PrivatePublicLists.css";
 
-export const PublicListWithAnimes = () => {
+export const PublicListWithAnimesPage = () => {
   const { listId } = useParams();
   const {
     state: {

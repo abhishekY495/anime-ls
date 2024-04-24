@@ -12,8 +12,9 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SearchPage } from "./pages/SearchPage";
 import { ListsPage } from "./pages/ListsPage";
-import { PrivateListWithAnimes } from "./pages/PrivateListWithAnimes";
-import { PublicListWithAnimes } from "./pages/PublicListWithAnimes";
+import { PublicProfilePage } from "./pages/PublicProfilePage";
+import { PrivateListWithAnimesPage } from "./pages/PrivateListWithAnimesPage";
+import { PublicListWithAnimesPage } from "./pages/PublicListWithAnimesPage";
 import { DisclaimerModal } from "./components/modals/DisclaimerModal";
 import { UserDataContext } from "./contexts/UserDataContext";
 import { isAuthenticated } from "./services/authentication/isAuthenticated";
@@ -78,7 +79,7 @@ export const App = () => {
           path="/:username/private/:listId"
           element={
             <ProtectedRoute>
-              <PrivateListWithAnimes />
+              <PrivateListWithAnimesPage />
             </ProtectedRoute>
           }
         />
@@ -86,7 +87,7 @@ export const App = () => {
           path="/:username/public/:listId"
           element={
             <ProtectedRoute>
-              <PublicListWithAnimes />
+              <PublicListWithAnimesPage />
             </ProtectedRoute>
           }
         />

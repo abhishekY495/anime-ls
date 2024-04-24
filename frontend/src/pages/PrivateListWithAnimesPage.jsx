@@ -11,7 +11,7 @@ import { removeAnimeFromList } from "../services/removeAnimeFromList";
 import deleteIcon from "../assets/delete.png";
 import "../components/lists/PrivatePublicLists.css";
 
-export const PrivateListWithAnimes = () => {
+export const PrivateListWithAnimesPage = () => {
   const { listId } = useParams();
   const {
     state: {
