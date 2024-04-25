@@ -7,6 +7,7 @@ import {
   addPublicList,
   deletePrivateList,
   deletePublicList,
+  increaseListView,
   loginUser,
   registerUser,
   removeAnimeFromPrivateList,
@@ -29,6 +30,7 @@ userRoutes.post("/login", loginUserValidation, loginUser);
 userRoutes.put("/profile", isAuthenticated, updateUserValidation, updateUser);
 userRoutes.get("/profile", isAuthenticated, userProfile);
 userRoutes.get("/:username", userPublicProfile);
+userRoutes.get("/:username/:listId", increaseListView);
 //
 userRoutes.put(
   "/privatelist/add-list",

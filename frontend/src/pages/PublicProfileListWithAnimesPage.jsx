@@ -9,6 +9,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { UserDataContext } from "../contexts/UserDataContext";
 import { PublicUserDetails } from "../components/PublicUserDetails";
 import { getPublicProfileData } from "../services/getPublicProfileData";
+import { viewIncrement } from "../services/viewIncrement";
 import viewsIcon from "../assets/views.png";
 import goBackIcon from "../assets/go-back.png";
 
@@ -31,6 +32,7 @@ export const PublicProfileListWithAnimesPage = () => {
     if (!publicProfileUserData?.username) {
       getPublicProfileData(username, dispatch);
     }
+    viewIncrement(username, listId);
   }, []);
 
   return (

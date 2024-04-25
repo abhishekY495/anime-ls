@@ -370,3 +370,26 @@ export const userPublicProfile = tryCatchAsyncHandler(async (req, res) => {
     publicLists: user.publicLists,
   });
 });
+
+export const increaseListView = tryCatchAsyncHandler(async (req, res) => {
+  const { username, listId } = req.params;
+
+  const user = await User.findOne({ username });
+  if (!user) {
+    res.status(400);
+    throw new Error("No such user");
+  }
+
+  const list = user.publicLists.find(
+    (list) => String(list._id) === String(listId)
+  );
+  if (!list) {
+    res.status(400);
+    throw new Error("No such list");
+  }
+
+  list.views = list.views + 1;
+  await user.save();
+
+  res.json({ message: "View Increased" });
+});
