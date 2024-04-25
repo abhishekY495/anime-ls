@@ -82,7 +82,6 @@ export const PublicProfileListWithAnimesPage = () => {
                         alt="views"
                         style={{
                           width: "18px",
-                          cursor: "pointer",
                           opacity: 0.8,
                         }}
                       />
