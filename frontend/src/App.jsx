@@ -19,6 +19,7 @@ import { DisclaimerModal } from "./components/modals/DisclaimerModal";
 import { UserDataContext } from "./contexts/UserDataContext";
 import { isAuthenticated } from "./services/authentication/isAuthenticated";
 import { isServerLive } from "./services/isServerLive";
+import { PublicProfileListWithAnimesPage } from "./pages/PublicProfileListWithAnimesPage";
 
 export const App = () => {
   const [serverLive, setServerLive] = useState(false);
@@ -90,6 +91,11 @@ export const App = () => {
               <PublicListWithAnimesPage />
             </ProtectedRoute>
           }
+        />
+        <Route path="/user/:username" element={<PublicProfilePage />} />
+        <Route
+          path="/user/:username/:listId"
+          element={<PublicProfileListWithAnimesPage />}
         />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>

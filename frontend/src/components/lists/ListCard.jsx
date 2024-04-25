@@ -7,7 +7,7 @@ import { ButtonGroup } from "./ButtonGroup";
 import { APP_LINK } from "../../utils/constants";
 import placeHolderImage from "../../assets/placeholder.png";
 
-export const ListCard = ({ list, inPrivate }) => {
+export const ListCard = ({ list, inPrivate, publicProfile }) => {
   const {
     state: {
       userData: { username },
@@ -17,11 +17,15 @@ export const ListCard = ({ list, inPrivate }) => {
   const listLink = `${APP_LINK}${username}/${
     inPrivate ? "private/" : "public/"
   }${list?._id}`;
+  const publicListLink = `${APP_LINK}user/${publicProfile?.username}/${list?._id}`;
 
   return (
     <Card style={{ cursor: "pointer" }}>
       <Card.Body>
-        <Link to={listLink} className="text-decoration-none">
+        <Link
+          to={publicProfile?.username ? publicListLink : listLink}
+          className="text-decoration-none"
+        >
           <Card.Img
             variant="top"
             src={list?.animes[0]?.coverImage || placeHolderImage}
@@ -44,7 +48,11 @@ export const ListCard = ({ list, inPrivate }) => {
             </Card.Text>
           )}
         </Link>
-        <ButtonGroup inPrivate={inPrivate} listId={list?._id} />
+        <ButtonGroup
+          inPrivate={inPrivate}
+          listId={list?._id}
+          publicProfile={publicProfile?.username ? publicProfile : false}
+        />
       </Card.Body>
     </Card>
   );

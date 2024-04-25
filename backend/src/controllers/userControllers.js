@@ -149,7 +149,7 @@ export const addPublicList = tryCatchAsyncHandler(async (req, res) => {
     },
   });
 });
-
+//
 export const deletePrivateList = tryCatchAsyncHandler(async (req, res) => {
   const user = req.user;
   const { listId } = req.body;
@@ -281,7 +281,7 @@ export const addAnimeToPublicList = tryCatchAsyncHandler(async (req, res) => {
     },
   });
 });
-
+//
 export const removeAnimeFromPrivateList = tryCatchAsyncHandler(
   async (req, res) => {
     const { user } = req;
@@ -354,3 +354,19 @@ export const removeAnimeFromPublicList = tryCatchAsyncHandler(
     });
   }
 );
+
+export const userPublicProfile = tryCatchAsyncHandler(async (req, res) => {
+  const username = req.params.username;
+
+  const user = await User.findOne({ username });
+  if (!user) {
+    res.status(400);
+    throw new Error("No such user");
+  }
+
+  res.json({
+    username: user.username,
+    fullname: user.fullname,
+    publicLists: user.publicLists,
+  });
+});

@@ -15,6 +15,10 @@ export const initState = {
   //
   removeAnimeLoading: false,
   removeAnimeError: false,
+  //
+  publicProfileUserDataLoading: false,
+  publicProfileUserDataError: false,
+  publicProfileUserData: {},
 };
 
 export const userDataReducer = (state, action) => {
@@ -134,6 +138,30 @@ export const userDataReducer = (state, action) => {
         ...state,
         removeAnimeLoading: false,
         removeAnimeError: true,
+      };
+    }
+    //
+    case "SET_PUBLIC_PROFILE_USER_DATA_LOADING": {
+      return {
+        ...state,
+        publicProfileUserDataLoading: true,
+        publicProfileUserData: action.payload,
+        publicProfileUserDataError: false,
+      };
+    }
+    case "SET_PUBLIC_PROFILE_USER_DATA": {
+      return {
+        ...state,
+        publicProfileUserDataLoading: false,
+        publicProfileUserData: action.payload,
+        publicProfileUserDataError: false,
+      };
+    }
+    case "SET_PUBLIC_PROFILE_USER_DATA_ERROR": {
+      return {
+        ...state,
+        publicProfileUserDataLoading: false,
+        publicProfileUserDataError: true,
       };
     }
   }

@@ -15,7 +15,14 @@ export const PrivateLists = () => {
       <AddNew isPrivate={true} />
       <div className="mt-3 private-lists">
         {userData.privateLists.map((list) => {
-          return <ListCard key={list?._id} list={list} inPrivate={true} />;
+          return (
+            <ListCard
+              key={list?._id}
+              list={list}
+              inPrivate={true}
+              publicProfile={false}
+            />
+          );
         })}
       </div>
     </>

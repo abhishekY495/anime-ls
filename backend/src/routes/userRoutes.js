@@ -13,6 +13,7 @@ import {
   removeAnimeFromPublicList,
   updateUser,
   userProfile,
+  userPublicProfile,
 } from "../controllers/userControllers.js";
 import { registerUserValidation } from "../middlewares/registerUserValidation.js";
 import { loginUserValidation } from "../middlewares/loginUserValidation.js";
@@ -27,6 +28,7 @@ userRoutes.post("/register", registerUserValidation, registerUser);
 userRoutes.post("/login", loginUserValidation, loginUser);
 userRoutes.put("/profile", isAuthenticated, updateUserValidation, updateUser);
 userRoutes.get("/profile", isAuthenticated, userProfile);
+userRoutes.get("/:username", userPublicProfile);
 //
 userRoutes.put(
   "/privatelist/add-list",
