@@ -3,14 +3,13 @@ import axios from "axios";
 
 import { API_URL } from "../utils/constants";
 
-const token = localStorage.getItem("token");
-
 export const deleteList = async (
   listId,
   inPrivate,
   closeDeleteConfirmationModal,
   dispatch
 ) => {
+  const token = localStorage.getItem("token");
   const toastId = toast.loading("Deleting list");
   dispatch({ type: "DELETE_LIST_LOADING" });
   try {

@@ -3,8 +3,6 @@ import toast from "react-hot-toast";
 
 import { API_URL } from "../utils/constants";
 
-const token = localStorage.getItem("token");
-
 export const addList = async (
   listName,
   isPrivate,
@@ -14,6 +12,7 @@ export const addList = async (
   if (listName.trim().length === 0) {
     toast.error("Cannot be empty");
   } else {
+    const token = localStorage.getItem("token");
     const toastId = toast.loading("Adding list");
     try {
       dispatch({ type: "ADD_LIST_LOADING" });

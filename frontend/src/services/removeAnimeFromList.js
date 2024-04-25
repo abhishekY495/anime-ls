@@ -3,8 +3,6 @@ import toast from "react-hot-toast";
 
 import { API_URL } from "../utils/constants";
 
-const token = localStorage.getItem("token");
-
 export const removeAnimeFromList = async (
   animeId,
   listId,
@@ -13,6 +11,7 @@ export const removeAnimeFromList = async (
 ) => {
   const toastId = toast.loading("Removing Anime");
   try {
+    const token = localStorage.getItem("token");
     dispatch({ type: "REMOVE_ANIME_FROM_LIST_LOADING" });
     const REMOVE_ANIME_FROM_LIST_API_URL =
       API_URL +

@@ -4,9 +4,6 @@ import axios from "axios";
 import { API_URL } from "../utils/constants";
 import { validEmailFormat } from "../utils/validEmailFormat";
 
-const UPDATE_DETAILS_API_URL = API_URL + "/user/profile";
-const token = localStorage.getItem("token");
-
 export const updateUser = async (
   fullname,
   email,
@@ -22,6 +19,8 @@ export const updateUser = async (
   } else if (!validEmailFormat(email)) {
     toast.error("Invalid Email format");
   } else {
+    const UPDATE_DETAILS_API_URL = API_URL + "/user/profile";
+    const token = localStorage.getItem("token");
     const toastId = toast.loading("Updating");
     setDisableUpdateBtn(true);
     try {
