@@ -14,6 +14,6 @@ export const isAuthenticated = async (token, dispatch) => {
     dispatch({ type: "USER_DATA", payload: user });
   } catch (error) {
     dispatch({ type: "USER_DATA_ERROR" });
-    localStorage.clear();
+    localStorage.removeItem("token");
   }
 };

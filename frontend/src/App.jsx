@@ -35,7 +35,7 @@ export const App = () => {
       isAuthenticated(token, dispatch);
     } else {
       dispatch({ type: "USER_DATA_ERROR" });
-      localStorage.clear();
+      localStorage.removeItem("token");
     }
   }, []);
 
