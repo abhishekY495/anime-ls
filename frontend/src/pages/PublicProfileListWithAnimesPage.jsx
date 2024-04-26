@@ -72,8 +72,8 @@ export const PublicProfileListWithAnimesPage = () => {
                       </Link>
                       {list?.listName}{" "}
                       <span
-                        className="text-muted pb-1"
-                        style={{ fontSize: "15px" }}
+                        className="text-muted"
+                        style={{ fontSize: "15px", paddingBottom: "6px" }}
                       >
                         ({list?.animes.length})
                       </span>

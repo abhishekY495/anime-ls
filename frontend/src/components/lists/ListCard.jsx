@@ -4,7 +4,6 @@ import Card from "react-bootstrap/Card";
 
 import { UserDataContext } from "../../contexts/UserDataContext";
 import { ButtonGroup } from "./ButtonGroup";
-import { APP_LINK } from "../../utils/constants";
 import placeHolderImage from "../../assets/placeholder.png";
 
 export const ListCard = ({ list, inPrivate, publicProfile }) => {
@@ -14,10 +13,10 @@ export const ListCard = ({ list, inPrivate, publicProfile }) => {
     },
   } = useContext(UserDataContext);
 
-  const listLink = `${APP_LINK}${username}/${
-    inPrivate ? "private/" : "public/"
-  }${list?._id}`;
-  const publicListLink = `${APP_LINK}user/${publicProfile?.username}/${list?._id}`;
+  const listLink = `/${username}/${inPrivate ? "private/" : "public/"}${
+    list?._id
+  }`;
+  const publicListLink = `/user/${publicProfile?.username}/${list?._id}`;
 
   return (
     <Card style={{ cursor: "pointer" }}>
