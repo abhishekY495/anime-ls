@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -7,11 +7,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import showPasswordIcon from "../assets/showPasswordIcon.svg";
+import hidePasswordIcon from "../assets/hidePasswordIcon.svg";
+
 export const Login = ({
   inputChangeHandler,
   formSubmitHandler,
   userDataLoading,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+
   return (
     <Container>
       <Row>
@@ -32,12 +39,21 @@ export const Login = ({
 
                 <Form.Group className="mb-3 fw-semibold" controlId="password">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    required
-                    onChange={inputChangeHandler}
-                    name="password"
-                  />
+                  <div className="position-relative">
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      onChange={inputChangeHandler}
+                      name="password"
+                      required
+                      className="pe-5"
+                    />
+                    <img
+                      src={showPassword ? showPasswordIcon : hidePasswordIcon}
+                      className="position-absolute border-start ps-2"
+                      style={{ top: "9px", right: "12px", cursor: "pointer" }}
+                      onClick={toggleShowPassword}
+                    />
+                  </div>
                 </Form.Group>
                 <Button
                   variant="primary"

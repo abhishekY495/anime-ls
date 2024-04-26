@@ -6,12 +6,15 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 import { updateUser } from "../services/updateUser";
+import showPasswordIcon from "../assets/showPasswordIcon.svg";
+import hidePasswordIcon from "../assets/hidePasswordIcon.svg";
 
 export const UserDetails = ({ userData, dispatch }) => {
   const [fullname, setFullname] = useState(userData?.fullname);
   const [email, setEmail] = useState(userData?.email);
   const [password, setPassword] = useState("");
   const [disableUpdateBtn, setDisableUpdateBtn] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const fullnameChangeHandler = (e) => {
     const fname = e.target.value;
@@ -40,6 +43,8 @@ export const UserDetails = ({ userData, dispatch }) => {
       setDisableUpdateBtn(true);
     }
   };
+
+  const toggleShowPassword = () => setShowPassword(!showPassword);
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -92,13 +97,21 @@ export const UserDetails = ({ userData, dispatch }) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPassword">
               <Form.Label className="mb-1">Password</Form.Label>
-              <Form.Control
-                type="password"
-                className="text-muted"
-                placeholder="Fill to update password"
-                onChange={passwordChangeHandler}
-                value={password}
-              />
+              <div className="position-relative">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  onChange={passwordChangeHandler}
+                  name="password"
+                  required
+                  className="pe-5"
+                />
+                <img
+                  src={showPassword ? showPasswordIcon : hidePasswordIcon}
+                  className="position-absolute border-start ps-2"
+                  style={{ top: "9px", right: "12px", cursor: "pointer" }}
+                  onClick={toggleShowPassword}
+                />
+              </div>
             </Form.Group>
             <Row>
               <Col>

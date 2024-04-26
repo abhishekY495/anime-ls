@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -7,11 +7,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import showPasswordIcon from "../assets/showPasswordIcon.svg";
+import hidePasswordIcon from "../assets/hidePasswordIcon.svg";
+
 export const Register = ({
   inputChangeHandler,
   formSubmitHandler,
   userDataLoading,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+
   return (
     <Container>
       <Row>
@@ -32,7 +39,15 @@ export const Register = ({
                   />
                 </Form.Group>
                 <Form.Group className="mb-2 fw-semibold" controlId="username">
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label>
+                    Username{" "}
+                    <span
+                      className="text-danger fst-italic"
+                      style={{ fontSize: "14px" }}
+                    >
+                      * Cannot be changed
+                    </span>
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     onChange={inputChangeHandler}
@@ -51,12 +66,21 @@ export const Register = ({
                 </Form.Group>
                 <Form.Group className="mb-3 fw-semibold" controlId="password">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    onChange={inputChangeHandler}
-                    name="password"
-                    required
-                  />
+                  <div className="position-relative">
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      onChange={inputChangeHandler}
+                      name="password"
+                      required
+                      className="pe-5"
+                    />
+                    <img
+                      src={showPassword ? showPasswordIcon : hidePasswordIcon}
+                      className="position-absolute border-start ps-2"
+                      style={{ top: "9px", right: "12px", cursor: "pointer" }}
+                      onClick={toggleShowPassword}
+                    />
+                  </div>
                 </Form.Group>
                 <Button
                   variant="primary"
