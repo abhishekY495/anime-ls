@@ -102,7 +102,7 @@ export const UserDetails = ({ userData, dispatch }) => {
                   type={showPassword ? "text" : "password"}
                   onChange={passwordChangeHandler}
                   name="password"
-                  required
+                  placeholder="Fill to update password"
                   className="pe-5"
                 />
                 <img
