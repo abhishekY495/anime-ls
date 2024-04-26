@@ -30,7 +30,7 @@ export const PrivateListWithAnimesPage = () => {
   return (
     <>
       {!list ? (
-        <p className="fw-semibold text-center mt-5 fs-3">🚫 No Access 🚫</p>
+        <p className="fw-semibold text-center mt-5 fs-3">No such List</p>
       ) : (
         <Container>
           <Row>

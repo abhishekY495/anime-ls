@@ -17,6 +17,7 @@ export const PublicListWithAnimesPage = () => {
   const {
     state: {
       userData: { publicLists },
+      removeAnimeLoading,
     },
     dispatch,
   } = useContext(UserDataContext);
@@ -82,6 +83,7 @@ export const PublicListWithAnimesPage = () => {
                             variant="danger"
                             className="fw-semibold mt-2 w-100 d-flex justify-content-center align-items-center gap-2"
                             onClick={() => removeBtnHandler(anime?._id)}
+                            disabled={removeAnimeLoading}
                           >
                             <img
                               width="12"
