@@ -29,10 +29,11 @@ export const ListCard = ({ list, inPrivate, publicProfile }) => {
           <Card.Img
             variant="top"
             src={list?.animes[0]?.coverImage || placeHolderImage}
-            className="rounded w-100 opacity-75"
+            className="rounded w-100"
             style={{
               height: "200px",
               objectFit: "cover",
+              filter: "blur(5px)",
             }}
           />
           <Card.Text className="m-0 pb-1 fs-4 ps-1 fw-bold text-truncate border-bottom text-white">

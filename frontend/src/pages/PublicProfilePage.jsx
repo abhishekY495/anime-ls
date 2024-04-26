@@ -44,6 +44,9 @@ export const PublicProfilePage = () => {
           {publicProfileUserData?.username && (
             <>
               <PublicUserDetails userData={publicProfileUserData} />
+              <p className="fs-3 pt-2" style={{ marginBottom: "-5px" }}>
+                {publicProfileUserData?.publicLists?.length} Public Lists
+              </p>
               <div className="mt-3 public-lists">
                 {publicProfileUserData?.publicLists?.map((list) => {
                   return (
