@@ -26,15 +26,14 @@ export const HomePage = () => {
           style={{ width: "900px" }}
         >
           <div className="bg-body-tertiary p-4 pt-2 border rounded-3">
-            <h1 className="display-3 fw-bold">Anime List Share</h1>
             <img
               src={animeCharacters}
-              className="rounded w-100 mb-2 object-fit-cover cover-image"
+              className="rounded w-100 mt-3 mb-2 object-fit-cover cover-image"
               alt="anime characters"
             />
             <p className="fs-3 m-0 lh-sm">
-              Discover, Create and Share Your Anime Lists with all the anime
-              addicts and the community. <br />
+              Discover, Create and Share Anime Lists with all the anime addicts
+              and the community. <br />
               {userData?.username ? (
                 <Button variant="primary" className="mt-3">
                   <Link
@@ -74,8 +73,8 @@ export const HomePage = () => {
                 <h2>🔒 Private Lists</h2>
                 <p className="fs-5">
                   Create <span className="fst-italic fw-bold">Private </span>
-                  lists of animes of your favorites or guilty pleasures which
-                  cannot be viewed by anyone.
+                  lists of your favorites or guilty pleasures which cannot be
+                  viewed by anyone.
                 </p>
                 {userData?.username && (
                   <Button
@@ -132,7 +131,7 @@ export const HomePage = () => {
               •{" "}
               <Link
                 className="text-decoration-underline link-offset-1 text-muted ms-1"
-                to="https://github.com/abhishekY495/anime-ls"
+                to="https://github.com/abhishekY495/myanime-list"
                 target="_blank"
               >
                 Code
