@@ -1,4 +1,4 @@
-# Anime LS
+# MyAnime List
 
 A Fullstack app for anime addicts to create **Private** lists of your favorite animes and **Public** lists to showcase your top picks.<br>
 Visit - https://myanime-list.pages.dev
