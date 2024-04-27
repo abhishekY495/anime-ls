@@ -118,6 +118,27 @@ export const HomePage = () => {
               </div>
             </div>
           </div>
+          {/*  */}
+          <div className="bg-body-tertiary p-2 text-center rounded-3">
+            <p className="m-0">
+              Made by{" "}
+              <Link
+                className="text-decoration-underline link-offset-1 text-muted me-1"
+                to="https://abhisheky495.netlify.app"
+                target="_blank"
+              >
+                Abhishek
+              </Link>{" "}
+              •{" "}
+              <Link
+                className="text-decoration-underline link-offset-1 text-muted ms-1"
+                to="https://github.com/abhishekY495/anime-ls"
+                target="_blank"
+              >
+                Code
+              </Link>
+            </p>
+          </div>
         </Col>
       </Row>
     </Container>
