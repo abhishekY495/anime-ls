@@ -1,0 +1,20 @@
+.list-btn {
+  background-color: black;
+}
+.list-btn:hover {
+  background-color: black;
+}
+.cover-image {
+  height: 350px;
+}
+
+@media (max-width: 767px) {
+  .lists-info {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+  }
+  .cover-image {
+    height: 280px;
+  }
+}
