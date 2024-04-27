@@ -3,8 +3,6 @@ import toast from "react-hot-toast";
 
 import { API_URL } from "../utils/constants";
 
-const token = localStorage.getItem("token");
-
 export const addAnimeToList = async (
   listId,
   animeData,
@@ -13,6 +11,7 @@ export const addAnimeToList = async (
 ) => {
   const toastId = toast.loading("Adding Anime");
   try {
+    const token = localStorage.getItem("token");
     dispatch({ type: "ADD_ANIME_TO_LIST_LOADING" });
     const ADD_ANIME_TO_LIST_API_URL =
       API_URL + `/user/${isPrivate ? "privateList" : "publicList"}/add-anime`;
